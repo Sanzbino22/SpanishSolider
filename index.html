@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spanish Soldier AR</title>
+    <title>Spanish Soldier AR with Audio</title>
     <!-- Import Google Model Viewer -->
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
     <style>
@@ -14,11 +14,29 @@
         height: 100vh;
         overflow: hidden;
         background-color: #f0f0f0;
+        font-family: sans-serif;
       }
       model-viewer {
         width: 100%;
         height: 100%;
       }
+      /* Audio player overlay */
+      .audio-container {
+        position: absolute;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 8px 16px;
+        border-radius: 30px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      }
+      audio {
+        height: 35px;
+        outline: none;
+      }
+      /* Custom AR button */
       #ar-button {
         position: absolute;
         bottom: 20px;
@@ -40,7 +58,15 @@
   </head>
   <body>
 
-    <!-- 3D AR Model Viewer linked to SpanishSoldier.glb -->
+    <!-- Audio Control Overlay using SoliderAudio.mp3 -->
+    <div class="audio-container">
+      <audio controls>
+        <source src="./SoliderAudio.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <!-- 3D AR Model Viewer using SpanishSoldier.glb -->
     <model-viewer 
       src="./SpanishSoldier.glb" 
       alt="Spanish Soldier 3D Model" 
@@ -52,7 +78,6 @@
       shadow-intensity="1" 
       auto-rotate>
       
-      <!-- Custom button to enter AR camera view -->
       <button slot="ar-button" id="ar-button">
         👋 View in your space
       </button>
